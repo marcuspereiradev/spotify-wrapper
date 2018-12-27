@@ -10,7 +10,7 @@ describe('Album', () => {
   let stubedFetch;
   beforeEach(() => {
     stubedFetch = sinon.stub(global, 'fetch');
-    stubedFetch.resolves();
+    stubedFetch.resolves({ json: () => ({ album: 'name' }) });
   });
   afterEach(() => {
     stubedFetch.restore();
@@ -34,6 +34,12 @@ describe('Album', () => {
 
       const album2 = getAlbum('1457291081167286');
       expect(stubedFetch).to.have.been.calledWith('https://api.spotify.com/v1/albums/1457291081167286');
+    });
+    it('should return the correct data from Promise', () => {
+      const album = getAlbum('2034468626865798');
+      album.then((data) => {
+        expect(data).to.be.eql({ album: 'name' });
+      });
     });
   });
 });
