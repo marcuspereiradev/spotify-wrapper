@@ -3,13 +3,13 @@ import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import {
   search, searchAlbums, searchArtists, searchTracks, searchPlaylist,
-} from '../src/main';
+} from '../src/search';
 
 chai.use(sinonChai);
 global.fetch = require('node-fetch');
 
 
-describe('Spotify', () => {
+describe('Search', () => {
   let stubedFetch;
   beforeEach(() => {
     stubedFetch = sinon.stub(global, 'fetch');

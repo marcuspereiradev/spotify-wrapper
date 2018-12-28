@@ -1,9 +1,18 @@
+// fetch global
+import { API_URL } from './config';
+import { toJSON } from './utils';
+
 const getAlbum = (id) => {
-  return fetch(`https://api.spotify.com/v1/albums/${id}`)
-    .then(data => data.json());
+  return fetch(`${API_URL}/albums/${id}`).then(toJSON);
 };
-const getAlbumTracks = () => {};
+const getAlbums = (ids) => {
+  return fetch(`${API_URL}/albums?ids=${ids}`).then(toJSON);
+};
+const getAlbumTracks = (id) => {
+  return fetch(`${API_URL}/tracks/${id}`).then(toJSON);
+};
 export {
   getAlbum,
+  getAlbums,
   getAlbumTracks,
 };
