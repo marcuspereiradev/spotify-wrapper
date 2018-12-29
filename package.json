@@ -6,7 +6,9 @@
   "scripts": {
     "lint": "./node_modules/.bin/eslint src/*.js",
     "prepush": "npm run lint && npm run test:coverage",
-    "build": "babel src -d lib --presets=@babel/env",
+    "clear": "rimraf lib",
+    "build": "npm run clear && babel src -d lib --presets=@babel/env",
+    "build:watch": "npm run build -- --watch",
     "test": "./node_modules/.bin/mocha  --require @babel/register tests/**/*.spec.js",
     "test:tdd": "./node_modules/.bin/mocha  --require @babel/register tests/**/*.spec.js --watch",
     "test:coverage": "nyc npm test"
@@ -50,6 +52,7 @@
     "mocha": "^5.2.0",
     "node-fetch": "^2.3.0",
     "nyc": "^13.1.0",
+    "rimraf": "^2.6.2",
     "sinon": "^7.2.2",
     "sinon-chai": "^3.3.0"
   },
