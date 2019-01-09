@@ -8,7 +8,7 @@ module.exports = {
     filename: './src/index',
   },
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist'),
     libraryTarget: 'umd',
     library: 'spotifyWrapper',
   },
