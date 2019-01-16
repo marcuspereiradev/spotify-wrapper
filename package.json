@@ -14,7 +14,8 @@
     "build:all": "npm run build && npm run build:umd && npm run build:umd:min",
     "test": "./node_modules/.bin/mocha  --require @babel/register tests/**/*.spec.js",
     "test:tdd": "./node_modules/.bin/mocha  --require @babel/register tests/**/*.spec.js --watch",
-    "test:coverage": "nyc npm test"
+    "test:coverage": "nyc npm test",
+    "coveralls": "npm run test:coverage && nyc report --reporter=text-lcov | coveralls"
   },
   "nyc": {
     "functions": 80,
@@ -49,6 +50,7 @@
     "@babel/register": "^7.0.0",
     "babel-loader": "^8.0.5",
     "chai": "^4.2.0",
+    "coveralls": "^3.0.2",
     "eslint": "^5.9.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
