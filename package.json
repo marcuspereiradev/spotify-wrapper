@@ -1,8 +1,8 @@
 {
   "name": "spotify-wrapper-mv",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A wrapper to work with the Spotify Web API.",
-  "main": "libnpm/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "lint": "./node_modules/.bin/eslint src/*.js",
     "prepush": "npm run lint && npm run test:coverage",
