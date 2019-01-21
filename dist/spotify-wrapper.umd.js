@@ -140,7 +140,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var search = function search(query, type) {
-  return fetch("".concat(_config__WEBPACK_IMPORTED_MODULE_0__["API_URL"], "/search?q=").concat(query, "&type=").concat(type)).then(_utils__WEBPACK_IMPORTED_MODULE_1__["toJSON"]);
+  return fetch("".concat(_config__WEBPACK_IMPORTED_MODULE_0__["API_URL"], "/search?q=").concat(query, "&type=").concat(type), _config__WEBPACK_IMPORTED_MODULE_0__["HEADERS"]).then(_utils__WEBPACK_IMPORTED_MODULE_1__["toJSON"]);
 };
 
 var searchArtists = function searchArtists(query) {
@@ -168,7 +168,15 @@ var searchPlaylist = function searchPlaylist(query) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "API_URL", function() { return API_URL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HEADERS", function() { return HEADERS; });
+var TOKEN_API = 'BQD-VmtvnUxSIwH9EO-lk571gJ4UHcP1XYY_60LWL4cY2CpOOjqXeZzJjH6NEZFfkCfsw6JR52Fn-ICqfwYNpCSh0pWjBrMXnxNfhLWgdZf5RvXmUXqF2wNinSs3ezGMQKW-KWTPGvRZ4BI';
 var API_URL = 'https://api.spotify.com/v1';
+var HEADERS = {
+  headers: {
+    Authorization: "Bearer ".concat(TOKEN_API)
+  }
+};
+
 
 /***/ }),
 /* 3 */
@@ -197,15 +205,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var getAlbum = function getAlbum(id) {
-  return fetch("".concat(_config__WEBPACK_IMPORTED_MODULE_0__["API_URL"], "/albums/").concat(id)).then(_utils__WEBPACK_IMPORTED_MODULE_1__["toJSON"]);
+  return fetch("".concat(_config__WEBPACK_IMPORTED_MODULE_0__["API_URL"], "/albums/").concat(id), _config__WEBPACK_IMPORTED_MODULE_0__["HEADERS"]).then(_utils__WEBPACK_IMPORTED_MODULE_1__["toJSON"]);
 };
 
 var getAlbums = function getAlbums(ids) {
-  return fetch("".concat(_config__WEBPACK_IMPORTED_MODULE_0__["API_URL"], "/albums?ids=").concat(ids)).then(_utils__WEBPACK_IMPORTED_MODULE_1__["toJSON"]);
+  return fetch("".concat(_config__WEBPACK_IMPORTED_MODULE_0__["API_URL"], "/albums?ids=").concat(ids), _config__WEBPACK_IMPORTED_MODULE_0__["HEADERS"]).then(_utils__WEBPACK_IMPORTED_MODULE_1__["toJSON"]);
 };
 
 var getAlbumTracks = function getAlbumTracks(id) {
-  return fetch("".concat(_config__WEBPACK_IMPORTED_MODULE_0__["API_URL"], "/tracks/").concat(id)).then(_utils__WEBPACK_IMPORTED_MODULE_1__["toJSON"]);
+  return fetch("".concat(_config__WEBPACK_IMPORTED_MODULE_0__["API_URL"], "/tracks/").concat(id), _config__WEBPACK_IMPORTED_MODULE_0__["HEADERS"]).then(_utils__WEBPACK_IMPORTED_MODULE_1__["toJSON"]);
 };
 
 

@@ -1,9 +1,9 @@
 // fetch global
-import { API_URL } from './config';
+import { API_URL, HEADERS } from './config';
 import { toJSON } from './utils';
 
 const search = (query, type) => {
-  return fetch(`${API_URL}/search?q=${query}&type=${type}`).then(toJSON);
+  return fetch(`${API_URL}/search?q=${query}&type=${type}`, HEADERS).then(toJSON);
 };
 const searchArtists = (query) => {
   search(query, 'artist');
