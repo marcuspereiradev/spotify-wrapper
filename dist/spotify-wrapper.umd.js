@@ -169,7 +169,7 @@ var searchPlaylist = function searchPlaylist(query) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "API_URL", function() { return API_URL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HEADERS", function() { return HEADERS; });
-var TOKEN_API = 'BQD-VmtvnUxSIwH9EO-lk571gJ4UHcP1XYY_60LWL4cY2CpOOjqXeZzJjH6NEZFfkCfsw6JR52Fn-ICqfwYNpCSh0pWjBrMXnxNfhLWgdZf5RvXmUXqF2wNinSs3ezGMQKW-KWTPGvRZ4BI';
+var TOKEN_API = 'BQD87u2-eXmunVZMixXWA72j1q5TGA0kBsic-92BkBv1YB-AZEQH8lP3TvjABOdrXgb7UIJZHaZX9ciCoc9mQgq27dzMSj1jwoxMkzOsgsmi_oHC9ogX4EWeIjLs7Zonc3mR1B74qEI0MJI';
 var API_URL = 'https://api.spotify.com/v1';
 var HEADERS = {
   headers: {
