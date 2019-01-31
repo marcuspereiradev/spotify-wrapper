@@ -96,31 +96,9 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _search__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "search", function() { return _search__WEBPACK_IMPORTED_MODULE_0__["search"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "searchAlbums", function() { return _search__WEBPACK_IMPORTED_MODULE_0__["searchAlbums"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "searchArtists", function() { return _search__WEBPACK_IMPORTED_MODULE_0__["searchArtists"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "searchTracks", function() { return _search__WEBPACK_IMPORTED_MODULE_0__["searchTracks"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "searchPlaylist", function() { return _search__WEBPACK_IMPORTED_MODULE_0__["searchPlaylist"]; });
-
-/* harmony import */ var _album__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getAlbum", function() { return _album__WEBPACK_IMPORTED_MODULE_1__["getAlbum"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getAlbums", function() { return _album__WEBPACK_IMPORTED_MODULE_1__["getAlbums"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getAlbumTracks", function() { return _album__WEBPACK_IMPORTED_MODULE_1__["getAlbumTracks"]; });
-
-
-
-
+module.exports = __webpack_require__(1).default;
 
 /***/ }),
 /* 1 */
@@ -128,36 +106,48 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "search", function() { return search; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchAlbums", function() { return searchAlbums; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchArtists", function() { return searchArtists; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchTracks", function() { return searchTracks; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchPlaylist", function() { return searchPlaylist; });
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
-// fetch global
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SpotifyWrapper; });
+/* harmony import */ var _search__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
+/* harmony import */ var _album__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
 
-var search = function search(query, type) {
-  return fetch("".concat(_config__WEBPACK_IMPORTED_MODULE_0__["API_URL"], "/search?q=").concat(query, "&type=").concat(type), _config__WEBPACK_IMPORTED_MODULE_0__["HEADERS"]).then(_utils__WEBPACK_IMPORTED_MODULE_1__["toJSON"]);
-};
 
-var searchArtists = function searchArtists(query) {
-  search(query, 'artist');
-};
 
-var searchAlbums = function searchAlbums(query) {
-  search(query, 'album');
-};
 
-var searchTracks = function searchTracks(query) {
-  search(query, 'track');
-};
+var SpotifyWrapper =
+/*#__PURE__*/
+function () {
+  function SpotifyWrapper(options) {
+    _classCallCheck(this, SpotifyWrapper);
 
-var searchPlaylist = function searchPlaylist(query) {
-  search(query, 'playlist');
-};
+    this.apiURL = options.apiURL || _config__WEBPACK_IMPORTED_MODULE_2__["API_URL"];
+    this.token = options.token;
+    this.album = _album__WEBPACK_IMPORTED_MODULE_1__["default"].bind(this)();
+    this.search = _search__WEBPACK_IMPORTED_MODULE_0__["default"].bind(this)();
+  }
+
+  _createClass(SpotifyWrapper, [{
+    key: "request",
+    value: function request(url) {
+      var headers = {
+        headers: {
+          Authorization: "Bearer ".concat(this.token)
+        }
+      };
+      return fetch(url, headers).then(_utils__WEBPACK_IMPORTED_MODULE_3__["default"]);
+    }
+  }]);
+
+  return SpotifyWrapper;
+}();
 
 
 
@@ -167,9 +157,52 @@ var searchPlaylist = function searchPlaylist(query) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return search; });
+function searcher(type, query) {
+  return this.request("".concat(this.apiURL, "/search?q=").concat(query, "&type=").concat(type));
+}
+
+function search() {
+  return {
+    searchArtists: searcher.bind(this, 'artist'),
+    searchAlbums: searcher.bind(this, 'album'),
+    searchTracks: searcher.bind(this, 'track'),
+    searchPlaylist: searcher.bind(this, 'playlist')
+  };
+}
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return album; });
+function album() {
+  var _this = this;
+
+  return {
+    getAlbum: function getAlbum(id) {
+      return _this.request("".concat(_this.apiURL, "/albums/").concat(id));
+    },
+    getAlbums: function getAlbums(ids) {
+      return _this.request("".concat(_this.apiURL, "/albums?ids=").concat(ids));
+    },
+    getAlbumTracks: function getAlbumTracks(id) {
+      return _this.request("".concat(_this.apiURL, "/tracks/").concat(id));
+    }
+  };
+}
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "API_URL", function() { return API_URL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HEADERS", function() { return HEADERS; });
-var TOKEN_API = 'BQD87u2-eXmunVZMixXWA72j1q5TGA0kBsic-92BkBv1YB-AZEQH8lP3TvjABOdrXgb7UIJZHaZX9ciCoc9mQgq27dzMSj1jwoxMkzOsgsmi_oHC9ogX4EWeIjLs7Zonc3mR1B74qEI0MJI';
+var TOKEN_API = 'BQBJQYWzViBpXs1gPB2bemyzm1XhPF26dnIAtGY_b_UW-0kQGmgWbr_J9NylSqxSrtMFwiqCPT9lW_IUtiim9yhZo5ZMa6SLVRTPbhHtGeZ0CglhLA3S6Zk4m5uxdPGlcyZnm7clcSv2Xl4';
 var API_URL = 'https://api.spotify.com/v1';
 var HEADERS = {
   headers: {
@@ -179,44 +212,18 @@ var HEADERS = {
 
 
 /***/ }),
-/* 3 */
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toJSON", function() { return toJSON; });
 var toJSON = function toJSON(data) {
   return data.json();
 };
 
-/***/ }),
-/* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAlbum", function() { return getAlbum; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAlbums", function() { return getAlbums; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAlbumTracks", function() { return getAlbumTracks; });
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
-// fetch global
-
-
-
-var getAlbum = function getAlbum(id) {
-  return fetch("".concat(_config__WEBPACK_IMPORTED_MODULE_0__["API_URL"], "/albums/").concat(id), _config__WEBPACK_IMPORTED_MODULE_0__["HEADERS"]).then(_utils__WEBPACK_IMPORTED_MODULE_1__["toJSON"]);
-};
-
-var getAlbums = function getAlbums(ids) {
-  return fetch("".concat(_config__WEBPACK_IMPORTED_MODULE_0__["API_URL"], "/albums?ids=").concat(ids), _config__WEBPACK_IMPORTED_MODULE_0__["HEADERS"]).then(_utils__WEBPACK_IMPORTED_MODULE_1__["toJSON"]);
-};
-
-var getAlbumTracks = function getAlbumTracks(id) {
-  return fetch("".concat(_config__WEBPACK_IMPORTED_MODULE_0__["API_URL"], "/tracks/").concat(id), _config__WEBPACK_IMPORTED_MODULE_0__["HEADERS"]).then(_utils__WEBPACK_IMPORTED_MODULE_1__["toJSON"]);
-};
-
-
+/* harmony default export */ __webpack_exports__["default"] = ({
+  toJSON: toJSON
+});
 
 /***/ })
 /******/ ]);

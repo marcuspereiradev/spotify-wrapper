@@ -5,7 +5,7 @@ module.exports = {
   mode: 'none',
   devtool: 'source-map',
   entry: {
-    filename: './src/index',
+    filename: './index',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
